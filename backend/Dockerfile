@@ -12,7 +12,7 @@ RUN addgroup --system app \
 ENV HOME=/home/app
 
 COPY requirements.lock.txt requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.lock.txt
+RUN pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir -r requirements.lock.txt
 
 COPY alembic.ini ./alembic.ini
 COPY alembic ./alembic
