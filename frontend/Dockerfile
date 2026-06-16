@@ -10,6 +10,11 @@ RUN npm run build
 
 FROM nginx:1.27-alpine
 
+RUN mkdir -p /etc/apk \
+ && echo "https://mirrors.aliyun.com/alpine/v3.21/main" > /etc/apk/repositories \
+ && echo "https://mirrors.aliyun.com/alpine/v3.21/community" >> /etc/apk/repositories \
+ && apk update
+ 
 RUN apk add --no-cache libcap \
     && setcap 'cap_net_bind_service=+ep' /usr/sbin/nginx \
     && mkdir -p /var/cache/nginx/client_temp /var/cache/nginx/proxy_temp /var/cache/nginx/fastcgi_temp /var/cache/nginx/uwsgi_temp /var/cache/nginx/scgi_temp \
